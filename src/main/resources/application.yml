@@ -1,0 +1,26 @@
+server:
+  port: 3000
+
+spring:
+  application:
+    name: nodejs-service
+
+sidecar:
+  port: 31863
+  hostname: localhost
+  health-uri: http://9.98.12.57:31863/health
+
+zuul:
+  routes:
+    hello:
+      path: /hello
+      url: http://9.98.12.57:31863/
+    api: 
+      path: /api/**
+      url: http://9.98.12.57:31863//api
+
+eureka:
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://9.98.12.57:30263//eureka/
